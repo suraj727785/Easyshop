@@ -16,16 +16,6 @@
           </li>
             <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
             <li><a href="signup.php">Register</a></li>
-            <li>
-              <a href="cart.php">
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </li>
-            <li>
-              <a href="profile.php">
-              <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-            </li>
           </ul>
 <!-------Login Modal-------->
 <div class="modal" id="loginModal">

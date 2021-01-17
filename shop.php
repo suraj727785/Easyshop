@@ -37,13 +37,17 @@
            $cat_title = $row['categories_title'];
 
           ?>
-         <li><a href=""></a><?php echo $cat_title?></li>
+         <li><a href="index.php"><?php echo $cat_title?></a></li>
          <?php
           }
           ?>
         </ul>
       </li>
         </div>
+        <?php 
+      if(isset($_SESSION['username'])){
+
+        ?>
             <li>
               <a href="cart.php">
                 <i class="fas fa-shopping-cart"></i>
@@ -54,6 +58,10 @@
               <i class="fa fa-user" aria-hidden="true"></i>
               </a>
             </li>
+            <?php
+            }  
+             ?>
+
           </ul>
         </nav>
      
@@ -66,6 +74,7 @@
           $shop_id = $row['shop_id'];
           $shop_name = $row['shop_name'];
           $shop_address=$row['shop_address'];
+         }
 
         ?>
         
@@ -75,21 +84,35 @@
         <p style="text-align:center;color:grey; margin-bottom:60px"><?php echo $shop_address ?></p>
         </div>
         <section class="home-cards">
+        <?php
+        $query="SELECT * FROM products WHERE product_shop_id =$the_shop_id";
+         $product_query=mysqli_query($connection,$query);
+         while($row=mysqli_fetch_assoc($product_query)){
+          $product_id = $row['product_id'];
+          $product_shop_id=$row['product_shop_id'];
+          $product_name = $row['product_name'];
+          $product_mrp=$row['product_mrp'];
+          $product_image=$row['product_image'];
+          $product_manufacturer=$row['product_manufacturer']
+
+        ?>
         <div>
             <img src="images/good_day.jpg" alt="">
-            <p style="color:grey; margin-bottom:0px">Britainia</p>
-            <h3>Good Day 100g</h3>
-            <p>MRP: 10</p>
+            <p style="color:grey; margin-bottom:0px"><?php echo $product_manufacturer ?></p>
+            <h3><?php echo $product_name ?></h3>
+            <p>MRP: <?php echo $product_mrp ?></p>
             <form method="get">
                       <label for="quantity">Qty: </label>
                       <input style="width:70px;display:inline" name="quantity"  class="form-control " type="number" id="number" value="1" min="1" >
                       <button  name="add" class="btn btn-success bg-light text-dark " value="<?php echo $product_id ?>">ADD  <i class="fa fa-shopping-basket" aria-hidden="true"></i></button> 
                       </form>
           </div>
-         
+          <?php 
+         }
+        ?>
         </section>
         <?php 
-         }}
+         }
         ?>
   
         <?php  include "includes/footer.php"; ?> 
