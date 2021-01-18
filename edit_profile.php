@@ -96,7 +96,7 @@ if(!$update_user_query){
             <li>
               <div class="search">    
             <li><a href="index.php">Home</a></li>
-            <li><a href="index.php">Continue Shopping</a></li>
+            <li><a href="includes/index.php">Logout</a></li>
            
             <li>
               <a href="cart.php">

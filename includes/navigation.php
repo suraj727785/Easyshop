@@ -7,12 +7,14 @@
     
           <ul class="right-menu">
             <li>
-              <div class="search">
-                 <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                 <button type="submit" class="searchButton">
+            <form class="form-inline" id="search" method="get" action="search_shop.php">
+               <div class="search">
+                 <input type="text" name="search" class="searchTerm" placeholder="Search shops..">
+                 <button type="submit" name="search_shop" class="searchButton">
                    <i class="fa fa-search"></i>
                 </button>
-           </div>
+                </div>
+                </form>
           </li>
             <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
             <li><a href="signup.php">Register</a></li>

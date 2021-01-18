@@ -4,7 +4,7 @@
         <!-- Nav -->
         <nav class="main-nav">
         <a href="index.php">
-          <img src="images/logo.png"alt="Easyshop" class="logo"></a>
+          <img  src="images/logo.png"alt="Easyshop" class="logo"></a>
     
           <ul class="right-menu">
             <li><a href="index.php">Home</a></li>
@@ -27,6 +27,7 @@
         <thead>
           <tr>
             <th class="first">Photo</th>
+            <th class="second">MRP</th>
             <th class="second">Qty</th>
             <th class="third">Product</th>
             <th class="fourth">Sub Total</th>
@@ -34,51 +35,39 @@
           </tr>
         </thead>
         <tbody>
+
+                <?php
+            $total_price=0;
+
+        $query = "SELECT * FROM carts WHERE user_id = '{$_SESSION['user_id']}' ";
+        $enter_cart_query=mysqli_query($connection,$query);
+        while($row=mysqli_fetch_assoc($enter_cart_query)){
+        $order_id=$row['order_id'];
+        $order_product_id=$row['order_product_id'];
+        $item=$row['order_name'];
+        $unit_price=$row['order_rate'];
+        $unit_quantity=$row['order_quantity'];
+        $sub_total= $unit_price * $unit_quantity;
+        $total_price=$total_price + $sub_total;
+        ?>
           <!-- shopping cart contents -->
           <tr class="productitm">
-            <!-- http://www.inkydeals.com/deal/ginormous-bundle/ -->
-            <td><img src="https://i.imgur.com/8goC6r6.png" class="thumb"></td>
-            <td><input type="number" value="1" min="0" max="99" class="qtyinput"></td>
-            <td>Design Bundle Package</td>
-            <td>79.00</td>
+            <td><img style="height:80px;width:120px" src="images/good_day.jpg" class="thumb"></td>
+            <td><?php echo $unit_price ?></td>
+            <td><?php echo $unit_quantity ?></td>
+            <td><?php echo $item ?></td>
+            <td><?php echo $sub_total ?></</td>
             <td><span class="remove"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></span></td>
           </tr>
-          <tr class="productitm">
-            <!-- http://www.amazon.com/Stuff-My-Cat-The-Book/dp/0811855384 -->
-            <td><img src="https://i.imgur.com/RkzoXzZ.png" class="thumb"></td>
-            <td><input type="number" value="1" min="0" max="99" class="qtyinput"></td>
-            <td>Stuff on my Cat: The Book</td>
-            <td>8.95</td>
-            <td><span class="remove"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></span></td>
-          </tr>
-          <tr class="productitm">
-            <!-- http://www.amazon.com/SpongeBob-SquarePants-The-First-Episodes/dp/B002DYJTVW -->
-            <td><img src="https://i.imgur.com/vZ26Uwy.png" class="thumb"></td>
-            <td><input type="number" value="1" min="0" max="99" class="qtyinput"></td>
-            <td>SpongeBob's First 100 </td>
-            <td>75.00</td>
-            <td><span class="remove"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></span></td>
-          </tr>
-          <tr class="productitm">
-            <!-- http://www.barnesandnoble.com/w/javascript-and-jquery-david-sawyer-mcfarland/1100405042 -->
-            <td><img src="https://i.imgur.com/tEdRnz4.png" class="thumb"></td>
-            <td><input type="number" value="1" min="0" max="99" class="qtyinput"></td>
-            <td>JavaScriptjQuery:The Missing </td>
-            <td>27.50</td>
-            <td><span class="remove"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></span></td>
-          </tr>
+          <?php
+          }
+          ?>
           
-          <!-- tax + subtotal -->
-          <tr class="extracosts">
-            <td class="light">Shipping  Tax</td>
-            <td colspan="2" class="light"></td>
-            <td>35.00</td>
-            <td>&nbsp;</td>
-          </tr>
+          
           <tr class="totalprice">
             <td class="light">Total:</td>
             <td colspan="2">&nbsp;</td>
-            <td colspan="2"><span class="thick">225.45</span></td>
+            <td colspan="2"><span class="thick"><?php echo $total_price; ?> Rupees</span></td>
           </tr>
           
 
@@ -88,11 +77,11 @@
               <div class="form-inline" style="display: flex;justify-content:space-around;" >
                 <div class="form-input" >
                 <label for="full name"><b>Your Name</b></label>
-                <input name="new_name" type="text" class="form-control" value="Suraj Kumar">
+                <input name="new_name" type="text" class="form-control" value="<?php echo $_SESSION['user_firstname']; echo " "; echo $_SESSION['user_lastname'];  ?>">
                </div>
                 <div class="form-input" >
                 <label for="full name"><b>Mobile no.</b></label>
-                <input name="new_mobno" type="text" class="form-control" value="9162741700">
+                <input name="new_mobno" type="text" class="form-control" value="<?php echo $_SESSION['user_mobileno']; ?>">
                 </div>
                  </div>
                  <div class="form-inline" style="display: flex;justify-content:space-around;" >
@@ -107,15 +96,18 @@
                 </select>
                 </div>
                 </div>
-              </form>
-              </div>
+                </div>
          <tr class="checkoutrow"  >
-            <td colspan="5" class="checkout"><button id="submitbtn">Confirm Order!</button></td>
+           <input type="hidden" name="total_price" value="<?php echo $total_price ?>" >
+            <td colspan="5" class="checkout"><button name="order" id="submitbtn">Confirm Order!</button></td>
           </tr>
+              </form>
+              
         </tbody>
       </table>
     </div>
   </div>
-  
 </body>
+
+<?php include "includes/checkout.php" ?>
 <?php  include "includes/footer.php"; ?>
