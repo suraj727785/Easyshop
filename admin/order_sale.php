@@ -13,7 +13,7 @@
                             Welcome to Sales
                             <small><?php echo $_SESSION['username'];   ?></small>
                         </h1> 
-              <form class="" action="" method="post" enctype="multipart/form-data" >
+            
                          
 <?php
 
@@ -32,8 +32,7 @@ while($row=mysqli_fetch_assoc($sell_products_query)){
     $full_address = $row['full_address'];      
 
 ?>
-               
-                                           
+                               
                           <div class="form-inline" style="margin-bottom:15px">
                             <div class="form-group">
                             <lebel for="name">Customer Name:</lebel>    
@@ -78,42 +77,15 @@ $total_amount=0;
 $total_purchase_amount=0;
 while($row=mysqli_fetch_assoc($sell_products_query)){
   
-    $placed_order_id = $row['placed_order_id'];
+
     $order_user_id = $row['order_user_id'];
     $placed_product_id = $row['placed_product_id'];
     $order_name = $row['order_name'];
     $order_rate = $row['order_rate'];
-    $order_quantity = $row['order_quantity'];    
-
-?>   
-    
-    
-
-                                
-                                
-                                
-                                <tr>
-                                <td><?php echo $order_name ?></td>
-                                <td><?php echo $order_rate ?></td>
-                                <td><?php echo $order_quantity ?></td>
-                                <td><input type='text' value='5'> </td>
-                                <td><button name="delete_product" class="btn btn-danger" value="<?php echo $placed_order_id ?>">Delete</button></td>
-                                </tr>
-                                
-                                
-
-    
- <?php
-
-$query="SELECT * FROM products WHERE product_id = {$placed_product_id} ";
-$profit_count_query = mysqli_query($connection,$query);
-while($row=mysqli_fetch_assoc($profit_count_query)){
-$purchase_rate=$row['product_purchase_rate'];
-     $total_purchase_amount = $total_purchase_amount + ($purchase_rate * $order_quantity) ;
-
-}
-        
-    $total_amount=$total_amount + $order_rate;
+    $order_quantity = $row['order_quantity']; 
+    $order_purchase_rate= $row['order_purchase_rate'];  
+    $total_purchase_amount = $total_purchase_amount + ($order_purchase_rate * $order_quantity);
+    $total_amount=$total_amount + ($order_rate*$order_quantity);
     
     }
 
@@ -121,8 +93,20 @@ $purchase_rate=$row['product_purchase_rate'];
 
 }
 
+?>   
+    
+    
 
-?>                              
+                                
+                                
+                                <form action="" method="post">
+                                <tr>
+                                <td><?php echo $order_name ?></td>
+                                <td><?php echo $order_rate ?></td>
+                                <td><?php echo $order_quantity ?></td>
+                                <td><input type='text' value='5'> </td>
+                                <td><button name="delete_product" class="btn btn-danger" value="<?php echo $placed_order_id ?>">Delete</button></td>
+                                </tr>                          
                                 </tbody>
                             </table>
                             <div class="form-inline">
@@ -150,6 +134,7 @@ $delete_query = mysqli_query($connection,$query);
 
 
     if(isset($_POST['place_order'])){
+        echo"<script>alert('Field Cannot Be Empty.')</script>";
     $user_id = $_POST['place_order'];
     $query = "INSERT INTO report(sell_amount,sell_date,purchase_amount) ";
     $query.="VALUES('{$total_amount}',now(),'{$total_purchase_amount}') ";

@@ -74,6 +74,11 @@
               </a>
             </li>
             <?php
+            }else{  
+             ?>
+            <li><a href="index.php">Home</a></li>
+          </ul>
+          <?php
             }  
              ?>
 
@@ -114,7 +119,8 @@
             <p style="color:grey; margin-bottom:0px"><?php echo $product_manufacturer ?></p>
             <h3><?php echo $product_name ?></h3>
             <p>MRP: <?php echo $product_mrp ?></p>
-            <form method="get">
+                   <form method="get" action="shop.php">
+                     <input type="hidden" name="shop_id" value="<?php echo $the_shop_id; ?>" />
                       <label for="quantity">Qty: </label>
                       <input style="width:70px;display:inline" name="quantity"  class="form-control " type="number" id="number" value="1" min="1" >
                       <button  name="add" class="btn btn-success bg-light text-dark " value="<?php echo $product_id ?>">ADD  <i class="fa fa-shopping-basket" aria-hidden="true"></i></button> 

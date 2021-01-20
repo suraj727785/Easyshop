@@ -3,7 +3,6 @@ if(isset($_POST['create_product'])){
 
 $product_name=$_POST['product_name'];
 $company=$_POST['company'];
-$agency=$_POST['agency'];
 $product_category=$_POST['product_category'];
 $purchase_rate=$_POST['purchase_rate'];
 $sale_rate=$_POST['sale_rate'];
@@ -31,9 +30,9 @@ $exp= date('d-m-y');
     
     
     
-$query= " INSERT INTO products(product_category_id,product_name,product_purchase_rate,net_purchase_rate,product_sale_rate,product_mrp,product_quantities,c_gst,s_gst,product_mfg,product_exp,product_manufacturer,product_image)" ;
+$query= " INSERT INTO products(product_category_id,product_shop_id,product_name,product_purchase_rate,net_purchase_rate,product_sale_rate,product_mrp,product_quantities,c_gst,s_gst,product_mfg,product_exp,product_manufacturer,product_image)" ;
 
-$query.= "VALUES('{$product_category}','{$product_name}','{$purchase_rate}','{$net_purchase_rate}','{$sale_rate}','{$mrp}','{$product_quantity}','{$cgst}','{$sgst}','{$mfg}','{$exp}','{$company}','{$product_image}' ) " ;
+$query.= "VALUES('{$product_category}','{$_SESSION['shop_id']}','{$product_name}','{$purchase_rate}','{$net_purchase_rate}','{$sale_rate}','{$mrp}','{$product_quantity}','{$cgst}','{$sgst}','{$mfg}','{$exp}','{$company}','{$product_image}' ) " ;
     
     
 $create_product_query = mysqli_query($connection,$query);  

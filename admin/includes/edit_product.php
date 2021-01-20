@@ -4,7 +4,7 @@ if(isset($_GET['p_id'])){
 $edit_product_id = $_GET['p_id'];
 
 }
-$query ="SELECT * FROM products WHERE product_id = $edit_product_id ";
+$query ="SELECT * FROM products WHERE product_id = $edit_product_id AND product_shop_id='{$_SESSION['shop_id']}' ";
 $select_product_update = mysqli_query($connection,$query);
 
 while($row=mysqli_fetch_assoc($select_product_update)){

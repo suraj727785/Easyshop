@@ -35,11 +35,11 @@ $query="SELECT * FROM orders ";
 $select_all_order=mysqli_query($connection,$query);
 $order_count=mysqli_num_rows($select_all_order); 
                 
-$query="SELECT * FROM product_categories ";
+$query="SELECT * FROM product_categories WHERE shop_id='{$_SESSION['shop_id']}' ";
 $select_product_categories=mysqli_query($connection,$query);
 $product_categories_count=mysqli_num_rows($select_product_categories);  
                 
-$query="SELECT * FROM products ";
+$query="SELECT * FROM products WHERE product_shop_id='{$_SESSION['shop_id']}'  ";
 $select_all_products=mysqli_query($connection,$query);
 $all_products_count=mysqli_num_rows($select_all_products);  
             
@@ -103,7 +103,7 @@ $admin_count=mysqli_num_rows($select_all_admin);
                     <div class="col-xs-9 text-right">
 
                     <?php
-                    $query="SELECT * FROM products ";
+                    $query="SELECT * FROM products WHERE product_shop_id='{$_SESSION['shop_id']}' ";
                     $select_all_products=mysqli_query($connection,$query);
                     $products_count=mysqli_num_rows($select_all_products);        
 
@@ -166,7 +166,7 @@ $admin_count=mysqli_num_rows($select_all_admin);
                     <div class="col-xs-9 text-right">
                                                                                          
                     <?php
-                    $query="SELECT * FROM product_categories ";
+                    $query="SELECT * FROM product_categories WHERE shop_id='{$_SESSION['shop_id']}' ";
                     $select_all_categories_query=mysqli_query($connection,$query);
                     $categories_count=mysqli_num_rows($select_all_categories_query);        
 

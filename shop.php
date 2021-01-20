@@ -65,10 +65,13 @@
               </a>
             </li>
             <?php
+            }else{  
+             ?>
+            <li><a href="index.php">Home</a></li>
+          </ul>
+          <?php
             }  
              ?>
-
-          </ul>
         </nav>
      
         <!-- Home cards 1 -->

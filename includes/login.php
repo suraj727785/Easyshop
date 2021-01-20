@@ -38,6 +38,16 @@ $select_user_query = mysqli_query($connection,$query);
         $_SESSION['user_mobileno']=$db_user_mobileno;
         $_SESSION['user_role']=$db_user_role;
 
+    if($db_user_role='Sales' or $db_user_role='Admin'){
+        $query="SELECT * FROM shops WHERE shop_owner_username='{$db_username}' ";
+        $shop_query=mysqli_query($connection,$query);
+        while($row=mysqli_fetch_assoc($shop_query)){
+            $db_shop_id=$row['shop_id'];
+        }
+        $_SESSION['shop_id']=$db_shop_id;
+
+    }
+
         
         header("Location: ../index.php");
     }

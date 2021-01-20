@@ -60,7 +60,7 @@
   <label class="label" for="address">Address:</label>
   <h3><?php echo $user_address; ?></h3><br>
   <a class="btn btn-secondary" href="edit_profile.php?u_id=<?php echo $user_id; ?>">Update Profile</a>
-  <a class="btn btn-secondary" href="view_orders.php">View Your Orders</a> 
+
     
 </div>
 

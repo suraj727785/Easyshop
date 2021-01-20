@@ -10,7 +10,7 @@ if(isset($_POST['checkBoxArray'])){
                 
             case 'delete': 
                 
-                $query="DELETE FROM products WHERE product_id='{$product_value_id}' ";
+                $query="DELETE FROM products WHERE product_id='{$product_value_id}' AND product_shop_id='{$_SESSION['shop_id']}' ";
                 $update_to_delete=mysqli_query($connection,$query);
                 confirmQuery($update_to_delete);
                 
@@ -76,7 +76,7 @@ if(isset($_POST['checkBoxArray'])){
                                 
 <?php
 
-     $query ="SELECT * FROM products ORDER BY product_id DESC ";
+     $query ="SELECT * FROM products WHERE  product_shop_id='{$_SESSION['shop_id']}' ORDER BY product_id DESC ";
     $select_products_query = mysqli_query($connection,$query);
 
     while($row=mysqli_fetch_assoc($select_products_query)){
@@ -103,7 +103,7 @@ if(isset($_POST['checkBoxArray'])){
     echo "<td>{$product_sale_rate}</td>";
     echo "<td>{$product_mrp}</td>";
         
-    $query ="SELECT * FROM product_categories WHERE categories_id = $product_category_id";
+    $query ="SELECT * FROM product_categories WHERE categories_id = $product_category_id AND shop_id='{$_SESSION['shop_id']}'";
     $select_product_categories_id = mysqli_query($connection,$query);
 
     while($row=mysqli_fetch_assoc($select_product_categories_id)){
@@ -137,7 +137,7 @@ if(isset($_POST['checkBoxArray'])){
     if(isset($_GET['delete'])){
      
 $delete_product_id=$_GET['delete'];
-$query= "DELETE FROM products WHERE product_id = {$delete_product_id}";
+$query= "DELETE FROM products WHERE product_id = {$delete_product_id} AND product_shop_id='{$_SESSION['shop_id']}'";
 $delete_query = mysqli_query($connection,$query);
      
 header("Location: product.php");

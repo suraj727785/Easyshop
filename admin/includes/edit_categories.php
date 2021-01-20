@@ -10,7 +10,7 @@
                         $cat_id = $_GET['edit'];
                     
                                 
-                    $query ="SELECT * FROM product_categories WHERE categories_id = $cat_id";
+                    $query ="SELECT * FROM product_categories WHERE categories_id = $cat_id AND shop_id='{$_SESSION['shop_id']}'";
                     $select_categories_update = mysqli_query($connection,$query);
 
                     while($row=mysqli_fetch_assoc($select_categories_update)){

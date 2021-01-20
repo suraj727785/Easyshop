@@ -57,7 +57,7 @@
             <td><?php echo $unit_quantity ?></td>
             <td><?php echo $item ?></td>
             <td><?php echo $sub_total ?></</td>
-            <td><span class="remove"><img src="https://i.imgur.com/h1ldGRr.png" alt="X"></span></td>
+            <td><span class="remove"><a href="cart.php?delete_item=<?php echo $order_product_id ?>"><i class="fa fa-times" aria-hidden="true"></i></a></span></td>
           </tr>
           <?php
           }
@@ -108,6 +108,16 @@
     </div>
   </div>
 </body>
+<?php
+if(isset($_GET['delete_item'])){
+    $delete_product_id=$_GET['delete_item'];
+    $query ="DELETE FROM carts WHERE order_product_id = '{$delete_product_id}' ";
+    $delete_row_query=mysqli_query($connection,$query);
+}
 
-<?php include "includes/checkout.php" ?>
+
+
+?>
+
+<?php include "includes/checkout.php"; ?>
 <?php  include "includes/footer.php"; ?>

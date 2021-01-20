@@ -18,7 +18,9 @@ if(isset($_GET['add'])){
         $purchase_product_name = $row['product_name'];  
         $purchase_product_image = $row['product_image']; 
         $purchase_product_sale_rate = $row['product_sale_rate'];
-        $purchase_product_quantities = $row['product_quantities']; 
+        $purchase_product_purchase_rate = $row['net_purchase_rate'];
+        $purchase_product_quantities = $row['product_quantities'];
+        $purchase_product_shop_id=$row['product_shop_id'];
       
           
       }
@@ -26,9 +28,9 @@ if(isset($_GET['add'])){
         if($purchase_product_quantities < $product_quantity){
           echo"<script>alert('Please select less quantity.')</script>";  
            }else{
-             $query= " INSERT INTO carts(username,user_id,mob_no,order_product_id,order_name,order_rate,order_quantity) ";
+             $query= " INSERT INTO carts(username,user_id,mob_no,order_id,order_product_id,order_shop_id,order_name,order_rate,order_purchase_rate,order_quantity) ";
 
-            $query.= " VALUES('{$_SESSION['username']}','{$_SESSION['user_id']}','{$_SESSION['user_mobileno']}','{$purchase_product_id}','{$purchase_product_name}','{$purchase_product_sale_rate}','{$product_quantity}' ) ";
+            $query.= " VALUES('{$_SESSION['username']}','{$_SESSION['user_id']}','{$_SESSION['user_mobileno']}','{$_SESSION['user_id']}','{$purchase_product_id}','{$purchase_product_shop_id}','{$purchase_product_name}','{$purchase_product_sale_rate}','{$purchase_product_purchase_rate}','{$product_quantity}' ) ";
             
             $insert_order_query=mysqli_query($connection,$query);
             
