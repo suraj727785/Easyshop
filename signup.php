@@ -13,6 +13,19 @@ if(isset($_POST['register'])){
     $new_username = mysqli_real_escape_string($connection,$new_username);
     $new_user_email = mysqli_real_escape_string($connection,$new_user_email);
     $new_password = mysqli_real_escape_string($connection,$new_password);
+    $query="SELECT * FROM users ";
+    $check_username_availablity_query= mysqli_query($connection,$query);
+    $is_username_available=true;
+    while($row=mysqli_fetch_assoc($check_username_availablity_query)){
+      $username_registered=$row['username'];
+      if($username_registered===$new_username){
+        $is_username_available=false;
+      }
+
+    }
+    if(!$is_username_available){
+      echo "<script>alert('Username not available please choose any other!!')</script>";
+    }else{
             
     $query="SELECT user_randSalt FROM users ";
     $select_randSalt_query= mysqli_query($connection,$query);
@@ -56,7 +69,7 @@ $query.= " VALUES('{$new_firstname}','{$new_lastname}','Subscriber','{$new_usern
 }
 
 
-
+}
 
 
 ?>

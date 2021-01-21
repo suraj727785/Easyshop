@@ -52,13 +52,16 @@
    $total_purchase_amount=0;
  if (isset($_POST['show'])){
      $report_date=$_POST['report_date'];
-     $query="SELECT * FROM report WHERE sell_date = '{$report_date}' ";
+     $query="SELECT * FROM report WHERE sell_date = '{$report_date}' AND report_shop_id='{$_SESSION['shop_id']}' ";
      $select_report_query=mysqli_query($connection,$query);
      if(!$select_report_query){
          die("Query Failed" .mysqli_error($connection));
      }
+     $row_count=mysqli_num_rows($select_report_query);
+     if($row_count!==0){
+
      while($row=mysqli_fetch_assoc($select_report_query)){
-     $sell_id=$row['sell_id'];
+     $sell_id=$row['report_id'];
      $sell_amount=$row['sell_amount'];
      $purchase_amount=$row['purchase_amount'];
      $profit=$sell_amount-$purchase_amount;
@@ -80,6 +83,7 @@
      }
      $total_profit = $total_sell_amount - $total_purchase_amount;
      $total_profit_percent = (($total_sell_amount*100)/$total_purchase_amount)-100;
+   
         echo "<tr>";
         echo"<td>Total</td>";
         echo"<td>{$total_sell_amount}</td>";
@@ -89,7 +93,9 @@
          echo "</tr>";     
      
      
-     
+    }else{
+        echo"<script>alert('No reports Available.')</script>";
+    }
      
  }                
                  

@@ -51,12 +51,13 @@ $query = "SELECT * FROM checkout WHERE order_user_id = '{$_SESSION['user_id']}' 
 $insert_orders =mysqli_query($connection,$query);
 while($row=mysqli_fetch_assoc($insert_orders)){
 $order_user_id  = $row['order_user_id'];
+$order_shop_id = $row['placed_shop_id'];
 }   
-$query = "INSERT INTO orders(order_user_id) ";
-$query.= "VALUES('{$order_user_id }') ";
+$query = "INSERT INTO orders(order_user_id,order_shop_id) ";
+$query.= "VALUES('{$order_user_id }','{$order_shop_id}') ";
 $confirm_order = mysqli_query($connection,$query);
 
-
+header("Location: ./confirm_order.php");
 
 }
 else{

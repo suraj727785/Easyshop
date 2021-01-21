@@ -1,4 +1,19 @@
 <?php  include "includes/header.php"; ?>
+
+
+<?php include "includes/checkout.php"; ?>
+<?php
+if(isset($_GET['delete_item'])){
+    $delete_product_id=$_GET['delete_item'];
+    $query ="DELETE FROM carts WHERE order_product_id = '{$delete_product_id}' ";
+    $delete_row_query=mysqli_query($connection,$query);
+    $x=$_SESSION['username'];
+    header("Location: cart.php?p_cart=$x");
+}
+
+
+
+?>
 <body>
 <div class="container">
         <!-- Nav -->
@@ -108,16 +123,5 @@
     </div>
   </div>
 </body>
-<?php
-if(isset($_GET['delete_item'])){
-    $delete_product_id=$_GET['delete_item'];
-    $query ="DELETE FROM carts WHERE order_product_id = '{$delete_product_id}' ";
-    $delete_row_query=mysqli_query($connection,$query);
-}
 
-
-
-?>
-
-<?php include "includes/checkout.php"; ?>
 <?php  include "includes/footer.php"; ?>

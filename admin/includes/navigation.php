@@ -52,10 +52,6 @@
                             </li>
                         </ul>
                     </li>
-                    
-                    <li>
-                    <a href="./users.php"><i class="fa fa-users"></i> Your Customers</a>
-                    </li>
                     <li>
                         <a href=".././profile.php"><i class="fa fa-user"></i> Profile</a>
                     </li>

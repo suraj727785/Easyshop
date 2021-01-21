@@ -64,7 +64,7 @@
 
         ?>
             <li>
-              <a href="cart.php">
+              <a href="cart.php?p_cart=<?php echo $_SESSION['username'] ?>">
                 <i class="fas fa-shopping-cart"></i>
               </a>
             </li>

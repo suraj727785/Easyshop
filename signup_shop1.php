@@ -10,9 +10,68 @@
 </head>
 
 <body>
+<?php  include "includes/db.php"; ?>
+<?php
+if(isset($_POST['signup_shop1'])){
+    
+    $new_firstname = $_POST['fname'];
+    $new_lastname = $_POST['lname'];
+    $new_username = $_POST['username'];
+    $new_user_email = $_POST['email'];
+    $new_password = $_POST['password'];
+    $new_user_mobno = $_POST['mobile_no'];
+    $new_user_address = $_POST['address'];
+
+    $new_username = mysqli_real_escape_string($connection,$new_username);
+    $new_user_email = mysqli_real_escape_string($connection,$new_user_email);
+    $new_password = mysqli_real_escape_string($connection,$new_password);
+    $query="SELECT * FROM users ";
+    $check_username_availablity_query= mysqli_query($connection,$query);
+    $is_username_available=true;
+    while($row=mysqli_fetch_assoc($check_username_availablity_query)){
+      $username_registered=$row['username'];
+      if($username_registered===$new_username){
+        $is_username_available=false;
+      }
+
+    }
+    if(!$is_username_available){
+      echo "<script>alert('Username not available please choose any other!!')</script>";
+      
+    }else{
+            
+    $query="SELECT user_randSalt FROM users ";
+    $select_randSalt_query= mysqli_query($connection,$query);
+    
+    if(!$select_randSalt_query){
+        die("Query Failed".mysqli_error($connection));
+    }
+    
+  $row=mysqli_fetch_assoc($select_randSalt_query);
+        
+   $randSalt=$row['user_randSalt'];
+    $new_password=crypt($new_password,$randSalt);
+    
+    
+    
+    if(!empty($new_firstname) && !empty($new_lastname) && !empty($new_username) && !empty($new_user_email) && !empty($new_password) ){
+    
+    $query= " INSERT INTO users(user_firstname,user_lastname,user_role,username,user_mobileno,user_address,user_email,user_password) ";
+
+$query.= " VALUES('{$new_firstname}','{$new_lastname}','Sales','{$new_username}','{$new_user_mobno}','{$new_user_address}','{$new_user_email}','{$new_password}') ";
+    
+    $register_new_user=mysqli_query($connection,$query);
+    if(!$register_new_user){
+       die("Query Failed".mysqli_error($connection) . ' ' .mysqli_errno($connection));
+    }
+    }
+    header("Location: signup_shop2.php");
+}
+}
+?>
 
 <div class="signup-page">
-<form class="signup" action="signup_shop2.php" method="post"  autocomplete="off" enctype="multipart/form-data">
+<form class="signup" action="" method="post"  autocomplete="off" enctype="multipart/form-data">
   <h1>Create account</h1>
   <h2>Please let us know about Shop Owner</h2>
   <div class="signup__field">

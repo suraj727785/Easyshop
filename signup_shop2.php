@@ -1,48 +1,7 @@
 <?php  include "includes/db.php"; ?>
  <?php
-if(isset($_POST['signup_shop1'])){
-    
-    $new_firstname = $_POST['fname'];
-    $new_lastname = $_POST['lname'];
-    $new_username = $_POST['username'];
-    $new_user_email = $_POST['email'];
-    $new_password = $_POST['password'];
-    $new_user_mobno = $_POST['mobile_no'];
-    $new_user_address = $_POST['address'];
 
-    $new_username = mysqli_real_escape_string($connection,$new_username);
-    $new_user_email = mysqli_real_escape_string($connection,$new_user_email);
-    $new_password = mysqli_real_escape_string($connection,$new_password);
-            
-    $query="SELECT user_randSalt FROM users ";
-    $select_randSalt_query= mysqli_query($connection,$query);
-    
-    if(!$select_randSalt_query){
-        die("Query Failed".mysqli_error($connection));
-    }
-    
-  $row=mysqli_fetch_assoc($select_randSalt_query);
-        
-   $randSalt=$row['user_randSalt'];
-    $new_password=crypt($new_password,$randSalt);
-    
-    
-    
-    if(!empty($new_firstname) && !empty($new_lastname) && !empty($new_username) && !empty($new_user_email) && !empty($new_password) ){
-    
-    $query= " INSERT INTO users(user_firstname,user_lastname,user_role,username,user_mobileno,user_address,user_email,user_password) ";
-
-$query.= " VALUES('{$new_firstname}','{$new_lastname}','Subscriber','{$new_username}','{$new_user_mobno}','{$new_user_address}','{$new_user_email}','{$new_password}') ";
-    
-    $register_new_user=mysqli_query($connection,$query);
-    if(!$register_new_user){
-       die("Query Failed".mysqli_error($connection) . ' ' .mysqli_errno($connection));
-    }
-    }
-   
-}
-
-
+ 
 if(isset($_POST['signup_shop'])){
   $new_shop_name=$_POST['shop_name'];
   $new_shop_type=$_POST['shop_type'];
@@ -79,7 +38,6 @@ $query.= " VALUES('{$new_shop_name}','{$new_shop_type}','{$shop_image}','{$new_s
     }
 
     
- 
 
 
 

@@ -22,14 +22,14 @@
         if($user_role==='Admin'){
           echo  "<li><a href='admin'>Admin</a></li>";
         }
-        elseif($user_role==='Salesman'){
-          echo  "<li><a href='sales'>Sale</a></li>";
+        elseif($user_role==='Sales'){
+          echo  "<li><a href='admin'>Sales</a></li>";
         }
         }
 ?>
          <li><a href='includes/logout.php'>Logout</a></li>
             <li>
-              <a href="cart.php">
+              <a href="cart.php?p_cart=<?php echo $_SESSION['username'] ?>">
                 <i class="fas fa-shopping-cart"></i>
               </a>
             </li>

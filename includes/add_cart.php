@@ -9,8 +9,7 @@ if(isset($_GET['add'])){
     else{
   if($product_quantity <= 0){
        echo"<script>alert('Please Add Quantity.')</script>";
-  }
-    else{
+  }else{
       $query= "SELECT * FROM products WHERE product_id = '{$purchase_product_id}' " ;
       $purchase_product_query = mysqli_query($connection,$query);
       while($row = mysqli_fetch_assoc($purchase_product_query)){
@@ -23,6 +22,21 @@ if(isset($_GET['add'])){
         $purchase_product_shop_id=$row['product_shop_id'];
       
           
+      }
+      $is_from_same_shop=true;
+      $query="SELECT * FROM carts WHERE user_id = '{$_SESSION['user_id']}' ";
+      $check_cart_query=mysqli_query($connection,$query);
+      while($row=mysqli_fetch_assoc($check_cart_query)){
+      $purchased_product_shop_id=$row['order_shop_id'];
+      if($purchased_product_shop_id!==$purchase_product_shop_id){
+        $is_from_same_shop=false;
+        break;
+      }
+      }
+      if(!$is_from_same_shop){
+        echo"<script>alert('You can just shop from one shop at a time So removed your previously saved items in cart.')</script>";  
+        $query="DELETE FROM carts WHERE user_id='{$_SESSION['user_id']}' ";
+        $delete_existing_from_cart=mysqli_query($connection,$query);
       }
       
         if($purchase_product_quantities < $product_quantity){

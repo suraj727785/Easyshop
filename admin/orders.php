@@ -30,7 +30,7 @@
                                 
 <?php
 
-     $query ="SELECT * FROM orders ";
+     $query ="SELECT * FROM orders WHERE order_shop_id= '{$_SESSION['shop_id']}' ";
     $select_products_query = mysqli_query($connection,$query);
 
     while($row=mysqli_fetch_assoc($select_products_query)){
