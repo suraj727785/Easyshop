@@ -4,8 +4,13 @@
 
 
       <?php 
-        if(isset($_GET['shop_id'])){
-         $the_shop_id=$_GET['shop_id'];
+        if(isset($_GET['cat_id'])){
+         $the_cat_id=$_GET['cat_id'];
+         $query="SELECT * FROM product_categories where categories_id='{$the_cat_id}' ";
+         $get_cat_details=mysqli_query($connection,$query);
+         while($row=mysqli_fetch_assoc($get_cat_details)){
+             $the_shop_id=$row['shop_id'];
+         }
          
 
         ?>
@@ -94,7 +99,7 @@
         </div>
         <section class="home-cards">
         <?php
-        $query="SELECT * FROM products WHERE product_shop_id =$the_shop_id";
+        $query="SELECT * FROM products WHERE product_shop_id =$the_shop_id AND product_category_id = $the_cat_id ";
          $product_query=mysqli_query($connection,$query);
          while($row=mysqli_fetch_assoc($product_query)){
           $product_id = $row['product_id'];

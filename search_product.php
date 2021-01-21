@@ -52,7 +52,7 @@
            $cat_title = $row['categories_title'];
 
           ?>
-         <li><a href="index.php"><?php echo $cat_title?></a></li>
+         <li><a href="shop_category.php?cat_id=<?php echo $cat_id; ?>"><?php echo $cat_title?></a></li>
          <?php
           }
           ?>

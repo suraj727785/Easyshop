@@ -141,7 +141,7 @@ $delete_query = mysqli_query($connection,$query);
     if(isset($_GET['place_order'])){
     $user_id = $_GET['place_order'];
     $query = "INSERT INTO report(sell_amount,sell_date,purchase_amount,report_shop_id) ";
-    $query.="VALUES('{$total_amount}',now(),'{$total_purchase_amount},'{$_SESSION['shop_id']}' ) ";
+    $query.="VALUES('{$total_amount}',now(),'{$total_purchase_amount}','{$_SESSION['shop_id']}' ) ";
     $report_query=mysqli_query($connection,$query);
     
     $query = "DELETE FROM checkout WHERE order_user_id = {$user_id} AND placed_shop_id='{$_SESSION['shop_id']}' ";
