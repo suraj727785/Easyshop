@@ -96,7 +96,7 @@ $query.= " VALUES('{$new_firstname}','{$new_lastname}','Sales','{$new_username}'
     <label class="signup__label" for="password">Password</label>
   </div>
   <div class="signup__field">
-    <input class="signup__input" type="tel" name="mobile_no" id="mobileno" required />
+    <input class="signup__input" type="text" pattern="[6-9]{1}[0-9]{9}" name="mobile_no" id="mobileno" required />
     <label class="signup__label" for="mobileno">Mobile No</label>
   </div>
   <div class="signup__field">
