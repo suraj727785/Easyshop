@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">
-                            Welcome to Sales
+                            Welcome to Admin
                             <small><?php echo $_SESSION['username'];   ?></small>
                         </h1> 
 
@@ -25,6 +25,7 @@
                            
                             <thead>
                                     <tr>
+                                        <th>Shop Name</th>
                                         <th>Product Name</th>
                                         <th>Image</th>
                                         <th>Quantity</th>
@@ -32,7 +33,6 @@
                                         <th>Sale Rate</th>
                                         <th>MRP</th>
                                         <th>Product Category</th>
-                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -48,16 +48,23 @@ if(isset($_POST['new_search_product'])){
   while($row=mysqli_fetch_assoc($sarch_product_query)){
     $product_id = $row['product_id'];
     $product_category_id = $row['product_category_id'];
+    $product_shop_id = $row['product_shop_id'];
     $product_name = $row['product_name'];
     $product_quantities = $row['product_quantities'];
     $product_purchase_rate = $row['net_purchase_rate'];
     $product_sale_rate = $row['product_sale_rate'];
     $product_mrp = $row['product_mrp'];
     $product_image = $row['product_image'];
+
+    $query="SELECT * FROM shops WHERE shop_id=$product_shop_id";
+    $select_shop_query=mysqli_query($connection,$query);
+    while($row=mysqli_fetch_assoc($select_shop_query)){
+        $shop_name=$row['shop_name'];
+    }
       
     
     echo "<tr>";
-
+    echo "<td>{$shop_name}</td>";
     echo "<td>{$product_name}</td>";
     echo "<td><img width='100' src = '../images/$product_image' alt='images'></td>";
     echo "<td>{$product_quantities}</td>";
@@ -76,7 +83,6 @@ if(isset($_POST['new_search_product'])){
         
     }
    
-    echo "<td><a href='product.php?source=edit_product&p_id={$product_id}'>Edit</a></td>"; 
     echo "<td><a  onClick= \"javascript: return confirm('Are you sure want to delete'); \"  href='product.php?delete={$product_id}'>Delete</a></td>";
         
         

@@ -35,7 +35,9 @@ if(isset($_SESSION['username'])){
           ?>
           
           <div><a href="shop.php?shop_id=<?php echo $shop_id ?>">
-            <img src="images/shop.jpg" alt=""></a>
+          <?php 
+           echo "<img src = 'images/$shop_image'style='width:250px; height:150px' alt='shop_iamge'>";
+            ?></a>
             <h3><?php echo $shop_name ?></h3>
             <p><?php echo $shop_address ?>
             </p>

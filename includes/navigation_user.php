@@ -23,7 +23,7 @@
           echo  "<li><a href='admin'>Admin</a></li>";
         }
         elseif($user_role==='Sales'){
-          echo  "<li><a href='admin'>Sales</a></li>";
+          echo  "<li><a href='sales'>Sales</a></li>";
         }
         }
 ?>

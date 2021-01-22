@@ -88,12 +88,17 @@
           $shop_id = $row['shop_id'];
           $shop_name = $row['shop_name'];
           $shop_address=$row['shop_address'];
+          $shop_image=$row['shop_image'];
          }
 
         ?>
         
         <div class="shop-top">
-        <img src="images/shop.jpg" alt="Shop-image"style="width:100%;height:290px; margin-bottom:5px" >
+        <a href="shop.php?shop_id=<?php echo $shop_id ?>">
+        <?php
+        echo"<img src='images/$shop_image' alt='Shop-image'style='width:100%;height:290px; margin-bottom:5px' >";
+        ?>
+        </a>
         <h1 style="text-align:center;color: #b80019;"><?php echo $shop_name ?></h1>
         <p style="text-align:center;color:grey; margin-bottom:60px"><?php echo $shop_address ?></p>
         </div>
@@ -111,7 +116,9 @@
 
         ?>
         <div>
-            <img src="images/good_day.jpg" alt="">
+        <?php 
+           echo "<img src = 'images/$product_image' style='width:250px; height:150px' alt='product_iamge'>";
+            ?>
             <p style="color:grey; margin-bottom:0px"><?php echo $product_manufacturer ?></p>
             <h3><?php echo $product_name ?></h3>
             <p>MRP: <?php echo $product_mrp ?></p>

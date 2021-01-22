@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Easyshop Sales</a>
+                <a class="navbar-brand" href="index.php">Easyshop Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -34,29 +34,28 @@
                 <ul class="nav navbar-nav side-nav">
                     <li>
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                     <li>
-                        <a href="orders.php"><i class="fa fa-shopping-cart"></i> Orders</a>
-                    </li>
-                    <li>
-                        <a href="./categories.php"><i class="fa fa-fw fa-desktop"></i> Product Categories</a>
+                    </li><li>
+                            <a href="./view_shop.php"><i class="fa fa-fw fa-building" aria-hidden="true" ></i> Shops</a>             
                     </li>
                     <li>
-                     <a href=" javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Product <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="posts_dropdown" class="collapse">
+                            <a href="./product.php"><i class="fa fa-fw fa-bars" aria-hidden="true" ></i> Products</a>             
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
                             <li>
-                                <a href="./product.php"> Veiw All Products</a>
+                            <a href="./users.php">Veiw All Users </a>
                             </li>
                             <li>
-                                <a href="product.php?source=add_product"> Add Products </a>
+                                <a href="users.php?source=add_user">Add Users</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href=".././profile.php"><i class="fa fa-user"></i> Profile</a>
+                        <a href=".././profile.php"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
                     </li>
                     <li>
-                        <a href="./report.php"><i class="fa fa-fw fa-dashboard"></i> Report</a>
+                        <a href="./report.php"><i class="fa fa-fw fa-dashboard"></i>Report</a>
                     </li>
                 </ul>
             </div>

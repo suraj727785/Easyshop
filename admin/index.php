@@ -20,7 +20,7 @@
                        
                        
                         <h1 class="page-header">
-                            Welcome to Sales
+                            Welcome to Admin
                             <small><?php echo $_SESSION['username'];   ?></small>
                         </h1>
                         
@@ -31,18 +31,23 @@
                 <!-- /.row -->
                 
 <?php
-$query="SELECT * FROM orders WHERE order_shop_id='{$_SESSION['shop_id']}' ";
-$select_all_order=mysqli_query($connection,$query);
-$order_count=mysqli_num_rows($select_all_order); 
                 
-$query="SELECT * FROM product_categories WHERE shop_id='{$_SESSION['shop_id']}' ";
-$select_product_categories=mysqli_query($connection,$query);
-$product_categories_count=mysqli_num_rows($select_product_categories);  
-                
-$query="SELECT * FROM products WHERE product_shop_id='{$_SESSION['shop_id']}'  ";
+$query="SELECT * FROM products ";
 $select_all_products=mysqli_query($connection,$query);
 $all_products_count=mysqli_num_rows($select_all_products);  
+            
+$query="SELECT * FROM users WHERE user_role = 'Subscriber' ";
+$select_all_subscribers=mysqli_query($connection,$query);
+$subscribers_count=mysqli_num_rows($select_all_subscribers);  
 
+$query="SELECT * FROM shops ";
+$select_all_shops=mysqli_query($connection,$query);
+$shops_count=mysqli_num_rows($select_all_shops); 
+                
+$query="SELECT * FROM users WHERE user_role = 'Admin' ";
+$select_all_admin=mysqli_query($connection,$query);
+$admin_count=mysqli_num_rows($select_all_admin);                 
+                
                 
                 
 ?>                
@@ -59,22 +64,22 @@ $all_products_count=mysqli_num_rows($select_all_products);
                     <div class="col-xs-9 text-right">
                       
                     <?php
-                    $query="SELECT * FROM orders WHERE order_shop_id='{$_SESSION['shop_id']}'";
-                   $select_all_order=mysqli_query($connection,$query);
-                   $order_count=mysqli_num_rows($select_all_order);        
+                    $query="SELECT * FROM shops ";
+                   $select_all_shops=mysqli_query($connection,$query);
+                   $shops_count=mysqli_num_rows($select_all_shops);        
 
-                    echo  "<div class='huge'>{$order_count}</div>";
+                    echo  "<div class='huge'>{$shops_count}</div>";
 
 
                     ?>  
                
-                        <div>Orders</div>
+                        <div>Shops</div>
                     </div>
                 </div>
             </div>
-            <a href="orders.php">
+            <a href="post.php">
                 <div class="panel-footer">
-                    <span class="pull-left">View All Orders</span>
+                    <span class="pull-left">View All Shops</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div>
@@ -86,12 +91,12 @@ $all_products_count=mysqli_num_rows($select_all_products);
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-product-hunt fa-5x" aria-hidden="true"></i>
+                        <i class="fa fa-product-hunt fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
 
                     <?php
-                    $query="SELECT * FROM products WHERE product_shop_id='{$_SESSION['shop_id']}' ";
+                    $query="SELECT * FROM products ";
                     $select_all_products=mysqli_query($connection,$query);
                     $products_count=mysqli_num_rows($select_all_products);        
 
@@ -113,29 +118,29 @@ $all_products_count=mysqli_num_rows($select_all_products);
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
-        <div class="panel panel-red">
+        <div class="panel panel-yellow">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-list fa-5x"></i>
+                        <i class="fa fa-user fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                                                                                         
-                    <?php
-                    $query="SELECT * FROM product_categories WHERE shop_id='{$_SESSION['shop_id']}' ";
-                    $select_all_categories_query=mysqli_query($connection,$query);
-                    $categories_count=mysqli_num_rows($select_all_categories_query);        
 
-                    echo  "<div class='huge'>{$categories_count}</div>";
+                    <?php
+                    $query="SELECT * FROM users ";
+                    $select_all_users_query=mysqli_query($connection,$query);
+                    $users_count=mysqli_num_rows($select_all_users_query);        
+
+                    echo  "<div class='huge'>{$users_count}</div>";
 
 
                     ?>  
-       
-                         <div>Product Categories</div>
+
+                        <div> Users</div>
                     </div>
                 </div>
             </div>
-            <a href="categories.php">
+            <a href="users.php">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -157,11 +162,11 @@ $all_products_count=mysqli_num_rows($select_all_products);
           ['Data', 'count'],
             <?php
             
-  $element_text=['Product Categories','Products','All orders',];
-  $element_count=[$product_categories_count,$all_products_count,$order_count];
+  $element_text=['Shops','Products','Admin','Users',];
+  $element_count=[$shops_count,$all_products_count,$admin_count,$subscribers_count];
             
             
-            for($i=0 ; $i<3 ; $i++){
+            for($i=0 ; $i<4 ; $i++){
                 
             echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}], ";
                 

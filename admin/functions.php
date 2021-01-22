@@ -23,8 +23,8 @@ $cat_title=$_POST['cat_title'];
          echo " This field should not be empty";
     }
     else{
-        $query = "INSERT INTO product_categories(categories_title,shop_id) ";
-        $query.= "VALUE('{$cat_title}','{$_SESSION['shop_id']}') "; 
+        $query = "INSERT INTO product_categories(categories_title) ";
+        $query.= "VALUE('{$cat_title}') "; 
         
         $create_category_query = mysqli_query($connection,$query);
         
@@ -37,7 +37,7 @@ $cat_title=$_POST['cat_title'];
 
 function find_all_prodct_categories(){
      global $connection;
-  $query ="SELECT * FROM product_categories WHERE shop_id='{$_SESSION['shop_id']}'  ";
+  $query ="SELECT * FROM product_categories";
 $select_product_categories = mysqli_query($connection,$query);
                                       
 while($row=mysqli_fetch_assoc($select_product_categories)){

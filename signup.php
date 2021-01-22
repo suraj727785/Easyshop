@@ -53,8 +53,7 @@ $query.= " VALUES('{$new_firstname}','{$new_lastname}','Subscriber','{$new_usern
     }
         
     echo"<script>alert('Thank you. Please login to purchase.')</script>"; 
-        
-
+    header("Location: index.php");  
     
 
     }

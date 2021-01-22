@@ -94,7 +94,7 @@ echo "Product Created";
     <select name="product_category" class="form-control">
     <?php    
 
-$query ="SELECT * FROM product_categories ";
+$query ="SELECT * FROM product_categories WHERE shop_id={$_SESSION['shop_id']} ";
 $select_categories = mysqli_query($connection,$query);
 confirmQuery($select_categories);
 

@@ -37,6 +37,7 @@
                                   <thead>
                                       <tr>
                                           <th>Sell Id</th>
+                                          <th>Shop Name</th>
                                           <th>Sell Amount</th>
                                           <th>Purchase Amount</th>
                                           <th>Profit</th>
@@ -46,13 +47,14 @@
                                   <tbody>
                                 
                       
+                      
                      
 <?php                   
    $total_sell_amount=0;
    $total_purchase_amount=0;
  if (isset($_POST['show'])){
      $report_date=$_POST['report_date'];
-     $query="SELECT * FROM report WHERE sell_date = '{$report_date}' AND report_shop_id='{$_SESSION['shop_id']}' ";
+     $query="SELECT * FROM report WHERE sell_date = '{$report_date}'  ";
      $select_report_query=mysqli_query($connection,$query);
      if(!$select_report_query){
          die("Query Failed" .mysqli_error($connection));
@@ -63,15 +65,23 @@
      while($row=mysqli_fetch_assoc($select_report_query)){
      $sell_id=$row['report_id'];
      $sell_amount=$row['sell_amount'];
+     $report_shop_id=$row['report_shop_id'];
      $purchase_amount=$row['purchase_amount'];
      $profit=$sell_amount-$purchase_amount;
      $profit_percent=(($sell_amount*100)/$purchase_amount)-100;
        
        $total_sell_amount = $total_sell_amount + $sell_amount;
        $total_purchase_amount = $total_purchase_amount + $purchase_amount;
+
+    $query="SELECT * FROM shops WHERE shop_id=$report_shop_id ";
+    $select_shop_name_query=mysqli_query($connection,$query);
+    while($row=mysqli_fetch_assoc($select_shop_name_query)){
+        $shop_name=$row['shop_name'];
+    }
      
         echo "<tr>";
         echo"<td>{$sell_id}</td>";
+        echo"<td>{$shop_name}</td>";
         echo"<td>{$sell_amount}</td>";
         echo"<td>{$purchase_amount}</td>";
         echo"<td>{$profit}</td>";
@@ -86,6 +96,7 @@
    
         echo "<tr>";
         echo"<td>Total</td>";
+        echo"<td></td>";
         echo"<td>{$total_sell_amount}</td>";
         echo"<td>{$total_purchase_amount}</td>";
         echo"<td>{$total_profit}</td>";

@@ -117,7 +117,7 @@ echo "<option value='{$old_cat_id}'>{$old_cat_title}</option>";
 
 }
         
-$query ="SELECT * FROM product_categories ";
+$query ="SELECT * FROM product_categories WHERE shop_id={$_SESSION['shop_id']} ";
 $select_categories = mysqli_query($connection,$query);
 confirmQuery($select_categories);
 

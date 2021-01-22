@@ -31,7 +31,8 @@ $query.= " VALUES('{$new_shop_name}','{$new_shop_type}','{$shop_image}','{$new_s
     }
         
     echo"<script>alert('Thank you. Please login to go your Shop.')</script>"; 
-        
+    
+    header("Location: index.php");    
 
     
 

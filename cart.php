@@ -62,12 +62,15 @@ if(isset($_GET['delete_item'])){
         $item=$row['order_name'];
         $unit_price=$row['order_rate'];
         $unit_quantity=$row['order_quantity'];
+        $order_image=$row['order_image'];
         $sub_total= $unit_price * $unit_quantity;
         $total_price=$total_price + $sub_total;
         ?>
           <!-- shopping cart contents -->
           <tr class="productitm">
-            <td><img style="height:80px;width:120px" src="images/good_day.jpg" class="thumb"></td>
+          <?php
+           echo "<td><img style='height:80px;width:120px' src = 'images/$order_image' class='thumb'></td>";
+            ?>
             <td><?php echo $unit_price ?></td>
             <td><?php echo $unit_quantity ?></td>
             <td><?php echo $item ?></td>
